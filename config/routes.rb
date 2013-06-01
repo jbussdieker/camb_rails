@@ -1,5 +1,13 @@
 CambRails::Application.routes.draw do
   root :to => 'home#index'
+
+  resources :tests do
+    member do
+      get 'start'
+      get 'data'
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

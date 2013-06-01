@@ -11,6 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130601230234) do
+
+  create_table "test_results", :force => true do |t|
+    t.integer  "test_id"
+    t.integer  "timestamp"
+    t.float    "total_time"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tests", :force => true do |t|
+    t.string   "host"
+    t.integer  "port"
+    t.integer  "duration"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.float    "interval"
+  end
 
 end
