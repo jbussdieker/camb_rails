@@ -2,8 +2,10 @@ class CreateTests < ActiveRecord::Migration
   def change
     create_table :tests do |t|
       t.string :host
-      t.integer :port
-      t.integer :duration
+      t.integer :port, :default => 80
+      t.integer :duration, :default => 60
+      t.float :interval, :default => 1
+      t.integer :status, :default => 0
 
       t.timestamps
     end

@@ -23,11 +23,12 @@ ActiveRecord::Schema.define(:version => 20130601230234) do
 
   create_table "tests", :force => true do |t|
     t.string   "host"
-    t.integer  "port"
-    t.integer  "duration"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.float    "interval"
+    t.integer  "port",       :default => 80
+    t.integer  "duration",   :default => 60
+    t.float    "interval",   :default => 1.0
+    t.integer  "status",     :default => 0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
 end

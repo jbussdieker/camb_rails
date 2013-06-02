@@ -4,7 +4,9 @@
   <tr>
     <th>Host</th>
     <th>Port</th>
+    <th>Interval</th>
     <th>Duration</th>
+    <th>Status</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,7 +16,9 @@
   <tr>
     <td><%= test.host %></td>
     <td><%= test.port %></td>
+    <td><%= test.interval %></td>
     <td><%= test.duration %></td>
+    <td><%= test.status %></td>
     <td><%= link_to 'Show', test %></td>
     <td><%= link_to 'Edit', edit_test_path(test) %></td>
     <td><%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -94,10 +94,14 @@ class TestsController < ApplicationController
   def data
     @test = Test.find(params[:id])
     @result = @test.test_results.where("timestamp > ?", params[:timestamp])
+    @data = {
+      :results => @result.collect {|r| [r.timestamp, r.total_time]},
+      :status => @test.status
+    }
 
     respond_to do |format|
       format.html
-      format.json { render json: @result.collect {|r| [r.timestamp, r.total_time]} }
+      format.json { render json: @data }
     end
   end
 end

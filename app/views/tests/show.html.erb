@@ -1,27 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Host:</b>
-  <%= @test.host %>
-</p>
-
-<p>
-  <b>Port:</b>
-  <%= @test.port %>
-</p>
-
-<p>
-  <b>Duration:</b>
-  <%= @test.duration %>
-</p>
-
-<p>
-  <b>Interval:</b>
-  <%= @test.interval %>
-</p>
-
-
-<%= link_to 'Edit', edit_test_path(@test) %> |
 <%= link_to 'Back', tests_path %>
 
 <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
@@ -36,10 +14,12 @@ function requestData() {
   $.ajax({
     url: '<%= data_test_path(@test, :format => :json) %>',
     data: {timestamp: timestamp},
-    success: function(points) {
+    success: function(data) {
       var series = chart.series[0],
       shift = series.data.length > 200; // shift if the series is longer than 20
 
+      points = data.results;
+      status = data.status;
       points.forEach(function(point) {
         // add the point
         timestamp = point[0];
@@ -47,7 +27,9 @@ function requestData() {
       });
       
       // call it again after one second
-      setTimeout(requestData, 1000);    
+      if (status == 1) {
+        setTimeout(requestData, 1000);    
+      }
     },
     cache: false
   });
