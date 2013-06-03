@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Back', tests_path %>
+<%= link_to 'Back', load_tests_path %>
 
 <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 
@@ -12,7 +12,7 @@
 timestamp = 0;
 function requestData() {
   $.ajax({
-    url: '<%= data_test_path(@test, :format => :json) %>',
+    url: '<%= data_load_test_path(@test, :format => :json) %>',
     data: {timestamp: timestamp},
     success: function(data) {
       var series = chart.series[0],
@@ -22,8 +22,8 @@ function requestData() {
       status = data.status;
       points.forEach(function(point) {
         // add the point
-        timestamp = point[0];
-        chart.series[0].addPoint(point, true, shift);
+        timestamp = point[1];
+        chart.series[point[0]].addPoint([point[1], point[2]], true, shift);
       });
       
       // call it again after one second
@@ -49,9 +49,14 @@ $(document).ready(function() {
       tickPixelInterval: 150,
       maxZoom: 20 * 1000
     },
-    series: [{
+    series: [
+<% Probe.all.each do |probe| %>
+    {
+      name : "<%= probe.location %>",
       data : []
-    }]
+    },
+<% end %>
+    ]
   });
 });
 </script>

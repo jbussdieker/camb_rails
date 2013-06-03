@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Location:</b>
+  <%= @probe.location %>
+</p>
+
+<p>
+  <b>Host:</b>
+  <%= @probe.host %>
+</p>
+
+
+<%= link_to 'Edit', edit_probe_path(@probe) %> |
+<%= link_to 'Back', probes_path %>

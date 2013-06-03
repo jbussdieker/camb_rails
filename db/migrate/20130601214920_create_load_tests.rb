@@ -1,6 +1,6 @@
-class CreateTests < ActiveRecord::Migration
+class CreateLoadTests < ActiveRecord::Migration
   def change
-    create_table :tests do |t|
+    create_table :load_tests do |t|
       t.string :host
       t.integer :port, :default => 80
       t.integer :duration, :default => 60

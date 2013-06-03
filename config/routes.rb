@@ -1,7 +1,12 @@
+require 'sidekiq/web'
+
 CambRails::Application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
+  resources :probes
+
   root :to => 'home#index'
 
-  resources :tests do
+  resources :load_tests do
     member do
       get 'start'
       get 'data'

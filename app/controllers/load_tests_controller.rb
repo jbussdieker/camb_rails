@@ -1,8 +1,8 @@
-class TestsController < ApplicationController
+class LoadTestsController < ApplicationController
   # GET /tests
   # GET /tests.json
   def index
-    @tests = Test.all
+    @tests = LoadTest.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class TestsController < ApplicationController
   # GET /tests/1
   # GET /tests/1.json
   def show
-    @test = Test.find(params[:id])
+    @test = LoadTest.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class TestsController < ApplicationController
   # GET /tests/new
   # GET /tests/new.json
   def new
-    @test = Test.new
+    @test = LoadTest.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class TestsController < ApplicationController
 
   # GET /tests/1/edit
   def edit
-    @test = Test.find(params[:id])
+    @test = LoadTest.find(params[:id])
   end
 
   # POST /tests
   # POST /tests.json
   def create
-    @test = Test.new(params[:test])
+    @test = LoadTest.new(params[:load_test])
 
     respond_to do |format|
       if @test.save
@@ -56,10 +56,10 @@ class TestsController < ApplicationController
   # PUT /tests/1
   # PUT /tests/1.json
   def update
-    @test = Test.find(params[:id])
+    @test = LoadTest.find(params[:id])
 
     respond_to do |format|
-      if @test.update_attributes(params[:test])
+      if @test.update_attributes(params[:load_test])
         format.html { redirect_to @test, notice: 'Test was successfully updated.' }
         format.json { head :no_content }
       else
@@ -72,30 +72,30 @@ class TestsController < ApplicationController
   # DELETE /tests/1
   # DELETE /tests/1.json
   def destroy
-    @test = Test.find(params[:id])
+    @test = LoadTest.find(params[:id])
     @test.destroy
 
     respond_to do |format|
-      format.html { redirect_to tests_url }
+      format.html { redirect_to load_tests_url }
       format.json { head :no_content }
     end
   end
 
   def start
-    @test = Test.find(params[:id])
+    @test = LoadTest.find(params[:id])
     @test.delay.start
 
     respond_to do |format|
-      format.html { redirect_to tests_url }
+      format.html { redirect_to load_tests_url }
       format.json { head :no_content }
     end
   end
 
   def data
-    @test = Test.find(params[:id])
-    @result = @test.test_results.where("timestamp > ?", params[:timestamp])
+    @test = LoadTest.find(params[:id])
+    @result = @test.load_test_results.where("timestamp > ?", params[:timestamp])
     @data = {
-      :results => @result.collect {|r| [r.timestamp, r.total_time]},
+      :results => @result.collect {|r| [r.probe_id - 1, r.timestamp, r.total_time]},
       :status => @test.status
     }
 

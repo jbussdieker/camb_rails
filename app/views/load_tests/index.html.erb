@@ -20,7 +20,7 @@
     <td><%= test.duration %></td>
     <td><%= test.status %></td>
     <td><%= link_to 'Show', test %></td>
-    <td><%= link_to 'Edit', edit_test_path(test) %></td>
+    <td><%= link_to 'Edit', edit_load_test_path(test) %></td>
     <td><%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
@@ -28,4 +28,4 @@
 
 <br />
 
-<%= link_to 'New Test', new_test_path %>
+<%= link_to 'New Test', new_load_test_path %>
